@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rørhjelp – videokonsultasjon med autorisert rørlegger</title>
+  <meta name="description" content="Få rørleggerens råd på video. Unngå unødvendig utrykning – få diagnose og konkrete steg på minutter. Bestill videokonsultasjon nå for 499 kr." />
+  <style>
+    :root{
+      --brand:#0ea5e9;--brand-2:#7dd3fc;--text:#0f172a;--muted:#475569;--bg:#f8fafc;
+      --card:#fff;--border:#e2e8f0;--ok:#22c55e;--warn:#f59e0b;--radius:16px;
+      --shadow:0 8px 24px rgba(2,6,23,.08)
+    }
+    *{box-sizing:border-box}html,body{margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#eff6ff,var(--bg))}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo{width:40px;height:40px;border-radius:12px;box-shadow:var(--shadow);display:block;object-fit:contain;background:#fff;padding:2px}
+    .menu{display:flex;gap:16px}
+    .menu a{color:var(--muted);text-decoration:none;font-size:14px}
+    .menu a:hover{color:var(--brand)}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;border:none;border-radius:14px;padding:12px 16px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(14,165,233,.35)}
+    .btn.secondary{background:#e2e8f0;color:#0f172a;box-shadow:none}
+    .btn.warn{background:var(--warn)}
+    .btn:active{transform:translateY(1px)}
+    .hero{padding:56px 0}
+    .grid-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;background:#e0f2fe;color:#075985;border:1px solid #bae6fd;padding:6px 12px;border-radius:999px}
+    h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:8px 0 12px}
+    .lead{font-size:clamp(16px,2.4vw,19px);color:var(--muted);margin:0 0 16px}
+    .hero-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .price{font-weight:900;font-size:34px}
+    section{padding:38px 0}
+    .section-title{font-size:26px;margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px;font-size:18px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .booking-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:0;overflow:hidden;box-shadow:var(--shadow)}
+    .booking-head{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .booking-body{padding:0}
+    details{border:1px solid var(--border);border-radius:12px;padding:12px;background:#fff}
+    details+details{margin-top:10px}
+    summary{font-weight:700;cursor:pointer}
+    footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted)}
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .pill{font-size:12px;border:1px solid #bbf7d0;background:#f0fdf4;color:#166534;border-radius:999px;padding:6px 10px}
+    @media (max-width:920px){.grid-hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}}
+    @media (max-width:560px){.cards{grid-template-columns:1fr}.menu{display:none}}
+  </style>
+  <link rel="icon" href="logo.png" />
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="logo.png" alt="Rørhjelp logo" class="logo">
+        <span data-brand>Rørhjelp</span>
+      </div>
+      <nav class="menu" aria-label="Hovedmeny">
+        <a href="#hvordan">Slik fungerer det</a>
+        <a href="#hvorfor">Hvorfor video</a>
+        <a href="#priser">Pris</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a class="btn" href="#booking">Bestill nå</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container grid-hero">
+      <div>
+        <span class="badge">Norskregistrert, autorisert rørlegger</span>
+        <h1>Rørlegger på <span style="color:var(--brand)">video</span> – få hjelp hjemmefra</h1>
+        <p class="lead">Unngå unødvendig utrykning. Få diagnose og konkrete steg på minutter.</p>
+        <div class="badges">
+          <span class="pill">Fornøyd-garanti</span>
+          <span class="pill">1–30 min konsultasjon</span>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <a class="btn" href="#booking">Velg tidspunkt</a>
+          <a class="btn warn" href="#booking">Akutt lekkasje (≤1 t) – 699 kr</a>
+          <a class="btn secondary" href="#priser">Se pris</a>
+        </div>
+        <div style="margin-top:12px;background:#ecfeff;border:1px solid #bae6fd;border-radius:12px;padding:12px;box-shadow:var(--shadow)">
+          <strong>Skal rørlegger komme?</strong> Forbered deg først: Vit hva du skal si og hva han bør ta med. Ofte reduserer det regningen betydelig – typisk 1 000–5 000 kr.
+        </div>
+        <div style="margin-top:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;box-shadow:var(--shadow)">
+          <strong>Fornøyd-garanti:</strong> Får du ikke hjelpen du trenger, refunderer vi beløpet.
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Pris og kort info">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div>
+            <div class="muted" style="font-weight:700">Videokonsultasjon</div>
+            <div class="price" data-price>kr 499</div>
+            <div class="muted" style="font-size:13px" data-duration>Varighet: 1–30 minutter</div>
+          </div>
+          <div aria-hidden="true" style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-size:28px">🎥</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <a class="btn" href="#booking" style="flex:1;justify-content:center">Velg tidspunkt</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="hjelp">
+    <div class="container">
+      <h2 class="section-title">Hva vi hjelper med</h2>
+      <p class="muted">Veiledning fra <strong>autorisert rørlegger</strong> – kom raskt i gang, og vær forberedt hvis det trengs besøk.</p>
+      <div class="cards" role="list">
+        <div class="card" role="listitem"><h3>Akutt smålekkasje</h3><p class="muted">Steng vann, lokaliser, trygge strakstiltak.</p></div>
+        <div class="card" role="listitem"><h3>Avløp & lukt</h3><p class="muted">Tett do/vask, vannlås, luktsporing.</p></div>
+        <div class="card" role="listitem"><h3>Kran & armatur</h3><p class="muted">Drypp/lekk, hvilke deler, enkel utskifting.</p></div>
+        <div class="card" role="listitem"><h3>WC & sisterne</h3><p class="muted">Rennende do, pakninger, justering.</p></div>
+        <div class="card" role="listitem"><h3>Varmtvann & trykk</h3><p class="muted">Lavt trykk, siler/ventiler, bereder-sjekk.</p></div>
+        <div class="card" role="listitem"><h3>Kjøkken & oppvask</h3><p class="muted">Tilkobling, lekkasjesøk, tilbakeslag.</p></div>
+        <div class="card" role="listitem"><h3>Bad & dusj</h3><p class="muted">Sluk, blandebatteri, dusjrenne.</p></div>
+        <div class="card" role="listitem"><h3>Utvendig kran & frost</h3><p class="muted">Frostsikring, tining, utskiftning.</p></div>
+        <div class="card" role="listitem"><h3>Plan & deler</h3><p class="muted">Handleliste + hva rørlegger bør ta med.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hvorfor">
+    <div class="container">
+      <h2 class="section-title">Hvorfor video først?</h2>
+      <div class="cards">
+        <div class="card"><h3>💰 Spar penger</h3><p class="muted">Unngå unødvendig utrykning.</p></div>
+        <div class="card"><h3>⏱️ Rask avklaring</h3><p class="muted">Plan på minutter.</p></div>
+        <div class="card"><h3>🔧 Gjør det selv</h3><p class="muted">Når du kan og det er lov.</p></div>
+        <div class="card"><h3>🚚 Forberedt besøk</h3><p class="muted">Rørlegger vet hva han skal ha med – spar 1 000–5 000 kr.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hvordan">
+    <div class="container">
+      <h2 class="section-title">Slik fungerer det</h2>
+      <div class="steps">
+        <div class="step"><strong>1) Bestill tid</strong><span class="muted">Velg et tidspunkt som passer. Du kan laste opp bilder/video.</span></div>
+        <div class="step"><strong>2) Videomøte</strong><span class="muted">Snakk med autorisert rørlegger. Vi kartlegger og viser deg konkrete grep.</span></div>
+        <div class="step"><strong>3) Plan og oppfølging</strong><span class="muted">Du får en enkel handlingsplan – og beskjed hvis fysisk besøk trengs.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="priser">
+    <div class="container">
+      <h2 class="section-title">Pris</h2>
+      <div class="card" style="max-width:520px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div>
+            <div class="muted" style="font-weight:700">Videokonsultasjon</div>
+            <div class="price">kr 499</div>
+            <div class="muted" style="font-size:13px">Varighet: 1–30 minutter</div>
+          </div>
+          <div aria-hidden="true" style="width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-size:26px">💬</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <a class="btn" href="#booking" style="flex:1;justify-content:center">Bestill</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking">
+    <div class="container">
+      <h2 class="section-title">Bestill videokonsultasjon</h2>
+      <p class="muted">Velg tidspunkt frem i tid – eller velg akutt ved lekkasje.</p>
+      <div class="cards" style="margin-bottom:16px">
+        <div class="card">
+          <h3>Standard • 499 kr</h3>
+          <p class="muted">Varighet 1–30 minutter. Passer for de fleste saker.</p>
+          <a class="btn" href="#" style="margin-top:8px">Velg tidspunkt</a>
+        </div>
+        <div class="card">
+          <h3>Akutt lekkasje • 699 kr</h3>
+          <p class="muted">Svar innen 1 time (hvis tilgjengelig). Rask avklaring og strakstiltak.</p>
+          <a class="btn warn" href="#" style="margin-top:8px">Start akutt-time</a>
+        </div>
+      </div>
+      <div class="booking-wrap">
+        <div class="booking-head">
+          <strong>Booking</strong>
+          <a class="btn" href="#" id="fallbackCal" style="display:none">Åpne i nytt vindu</a>
+        </div>
+        <div class="booking-body" id="calendlyFrame" aria-live="polite">
+          <!-- Legg inn din Calendly-lenke i stedet for # hvis du vil vise booking her -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Ofte stilte spørsmål</h2>
+      <details>
+        <summary>Hva rekker vi på en konsultasjon?</summary>
+        <p>Normalt holder 1–30 minutter til å stille riktig diagnose og gi deg tydelige steg. Trenger vi mer tid, avtaler vi det.</p>
+      </details>
+      <details>
+        <summary>Må jeg installere noe?</summary>
+        <p>Nei. Du trykker bare på en knapp – fungerer på både mobil og PC.</p>
+      </details>
+      <details>
+        <summary>Hva hvis det må komme rørlegger?</summary>
+        <p>Da sier vi fra. Besøket blir raskere og mer treffsikkert fordi vi har gjort forarbeidet.</p>
+      </details>
+      <details>
+        <summary>Kan jeg avbestille?</summary>
+        <p>Avbestilling er gratis frem til 1 minutt før avtalen. Ikke møtt time refunderes ikke.</p>
+      </details>
+      <details>
+        <summary>Hva med fornøyd-garantien?</summary>
+        <p>Får du ikke hjelpen du trenger, refunderer vi beløpet.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <h2 class="section-title">Kontakt</h2>
+      <div class="card" style="max-width:560px">
+        <p>E-post: <a href="mailto:Otnesrorservice@gmai.com">Otnesrorservice@gmai.com</a></p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
