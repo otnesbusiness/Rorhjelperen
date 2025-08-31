@@ -78,13 +78,18 @@
     .kalk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .kalk-grid label{font-size:13px;color:var(--muted)}
     .kalk-result{margin-top:10px;font-weight:800}
-    .notice{font-size:12px;color:var(--muted);margin-top:6px}
+    .notice{margin-top:6px;font-size:12px;color:var(--muted)}
 
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .form-grid .full{grid-column:1 / -1}
     .field{display:flex;flex-direction:column;gap:6px}
-    .field input,.field select, .field textarea{padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit}
+    .field input,.field select,.field textarea{padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit}
 
+    /* Takk-seksjon: skjult som standard, vis kun ved #takk */
+    #takk{display:none}
+    #takk:target{display:block}
+
+    /* Mobil */
     @media (max-width:920px){
       .grid-hero{grid-template-columns:1fr}
       .hero-aside{order:1; margin-top:14px}
@@ -94,8 +99,6 @@
       .form-grid{grid-template-columns:1fr}
     }
     @media (max-width:560px){ .cards{grid-template-columns:1fr} .menu{display:none} }
-  #takk{display:none}
-  #takk:target{display:block !important}
   </style>
   <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%237cc5eb"/><stop offset="1" stop-color="%23cfefff"/></linearGradient></defs><rect rx="12" ry="12" width="64" height="64" fill="white"/><circle cx="32" cy="32" r="26" fill="url(%23g)"/><path d="M35 19l-7 9a6 6 0 108 8l9-7-3-3-4 3-3-3 3-4-3-3z" fill="white"/></svg>' />
 </head>
@@ -136,11 +139,7 @@
         <span class="badge">Norskregistrert, autorisert rørlegger</span>
         <h1>Spar penger med rørlegger digitalt – <span style="color:var(--brand)">video eller bilder</span></h1>
         <p class="lead">Rask diagnose og konkrete steg. Ofte nok til å stoppe lekkasje eller gjøre et fysisk besøk kortere og billigere.</p>
-        <p class="lead" style="margin-top:0">Vi kan også gi <strong>steg‑for‑steg veiledning</strong> slik at du gjør det selv når det er <em>lovlig</em> – f.eks. tømme/åpne ved sluk eller sikre midlertidig.</p>
-
-        
-          <div><strong>Fornøyd‑garanti:</strong> Får du ikke hjelpen du trenger, <u>refunderer vi beløpet</u>.</div>
-        </div>
+        <p class="lead" style="margin-top:0">Vi kan også gi <strong>steg-for-steg veiledning</strong> slik at du gjør det selv når det er <em>lovlig</em> – f.eks. tømme/åpne ved sluk eller sikre midlertidig.</p>
 
         <div class="save" style="margin-top:10px;background:#eff6ff;border-color:#bae6fd">
           <div aria-hidden="true">📷</div>
@@ -158,7 +157,6 @@
 
         <div class="badges">
           <span class="pill">Betal etterpå</span>
-          
           <span class="pill">Mobil eller PC</span>
         </div>
       </div>
@@ -178,7 +176,7 @@
           <a class="btn sm ok" href="#booking" data-action="kveld" style="justify-content:center">Kveld • 599 kr (16–21)</a>
           <a class="btn sm warn" href="#booking" data-action="akutt" style="justify-content:center">Akutt • 699 kr (svar ≤1 t)</a>
         </div>
-        <p class="note"><strong>Betal etter endt konsultasjon.<\/strong><\/p>
+        <p class="note"><strong>Betal etter endt konsultasjon.</strong></p>
       </aside>
     </div>
   </section>
@@ -189,7 +187,7 @@
       <div class="cards">
         <div class="card"><h3>💰 Spar penger</h3><p class="muted">Unngå unødvendig utrykning og bomtur.</p></div>
         <div class="card"><h3>⏱️ Rask avklaring</h3><p class="muted">Plan på minutter – ikke dager.</p></div>
-        <div class="card"><h3>🔧 Steg‑for‑steg når lovlig</h3><p class="muted">Vi veileder deg trygt – f.eks. ved sluk.</p></div>
+        <div class="card"><h3>🔧 Steg-for-steg når lovlig</h3><p class="muted">Vi veileder deg trygt – f.eks. ved sluk.</p></div>
         <div class="card"><h3>📷 Holder ofte med bilder</h3><p class="muted">Send bilder – vi sier hva rørlegger bør få vite.</p></div>
       </div>
     </div>
@@ -204,7 +202,7 @@
         <div class="card" role="listitem"><h3>Avløp & lukt</h3><p class="muted">Tett do/vask, vannlås, luktsporing.</p></div>
         <div class="card" role="listitem"><h3>Kran & armatur</h3><p class="muted">Drypp/lekk, hvilke deler, enkel utskifting.</p></div>
         <div class="card" role="listitem"><h3>WC & sisterne</h3><p class="muted">Rennende do, pakninger, justering.</p></div>
-        <div class="card" role="listitem"><h3>Varmtvann & trykk</h3><p class="muted">Lavt trykk, siler/ventiler, bereder‑sjekk.</p></div>
+        <div class="card" role="listitem"><h3>Varmtvann & trykk</h3><p class="muted">Lavt trykk, siler/ventiler, bereder-sjekk.</p></div>
         <div class="card" role="listitem"><h3>Kjøkken & oppvask</h3><p class="muted">Tilkobling, lekkasjesøk, tilbakeslag.</p></div>
         <div class="card" role="listitem"><h3>Bad & dusj</h3><p class="muted">Sluk, blandebatteri, dusjrenne.</p></div>
         <div class="card" role="listitem"><h3>Utvendig kran & frost</h3><p class="muted">Frostsikring, tining, utskiftning.</p></div>
@@ -217,7 +215,7 @@
     <div class="container">
       <h2 class="section-title">Slik fungerer det</h2>
       <div class="steps">
-        <div class="step"><strong>1) Bestill tid</strong><span class="muted">Velg tidspunkt. Du legger inn <u>mobilnummer</u> og <u>e‑post</u>, og velger kontaktmåte.</span></div>
+        <div class="step"><strong>1) Bestill tid</strong><span class="muted">Velg tidspunkt. Du legger inn <u>mobilnummer</u> og <u>e-post</u>, og velger kontaktmåte.</span></div>
         <div class="step"><strong>2) Samtale digitalt</strong><span class="muted">Vi kartlegger, bekrefter årsak og viser konkrete, trygge grep.</span></div>
         <div class="step"><strong>3) Videre plan</strong><span class="muted">Klare råd + hva du bør formidle til rørlegger for å redusere tidsbruk. Ved behov: bestill fysisk besøk.</span></div>
       </div>
@@ -232,13 +230,13 @@
         <div class="card"><h3>Kveld • 599 kr</h3><p class="muted">1–30 minutter. 16:00–21:00. Når det ikke kan vente til i morgen.</p><a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Bestill kveld</a></div>
         <div class="card"><h3>Akutt • 699 kr</h3><p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p><a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt</a></div>
       </div>
-      <p class="notice">Alle priser inkl. mva. <strong>Betaling etter endt konsultasjon.<\/strong><\/p>
+      <p class="notice">Alle priser inkl. mva. <strong>Betaling etter endt konsultasjon.</strong></p>
     </div>
   </section>
 
   <section id="kalkulator">
     <div class="container">
-      <h2 class="section-title">Spar‑kalkulator</h2>
+      <h2 class="section-title">Spar-kalkulator</h2>
       <p class="muted">Sammenlign estimert kostnad ved fysisk utrykning først vs. digital konsultasjon først.</p>
       <div class="kalk-wrap">
         <div class="kalk-grid">
@@ -246,7 +244,14 @@
           <div><label for="oppmote">Utrykningsgebyr (kr)</label><input id="oppmote" type="number" inputmode="numeric" value="1000" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
           <div><label for="timerUten">Timer uten video (h)</label><input id="timerUten" type="number" step="0.5" value="2.5" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
           <div><label for="timerMed">Timer med video (h)</label><input id="timerMed" type="number" step="0.5" value="1.0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
-          <div><label for="videopris">Videopris (kr)</label><select id="videopris" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"><option value="499" selected>Dag (499)</option><option value="599">Kveld (599)</option><option value="699">Akutt (699)</option></select></div>
+          <div>
+            <label for="videopris">Videopris (kr)</label>
+            <select id="videopris" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
+              <option value="499" selected>Dag (499)</option>
+              <option value="599">Kveld (599)</option>
+              <option value="699">Akutt (699)</option>
+            </select>
+          </div>
         </div>
         <div class="kalk-result" id="resultat">Potensiell besparelse: kr 0</div>
         <p class="notice">Dette er et estimat. Virkelig tidsbruk varierer med oppdrag og avstand.</p>
@@ -257,12 +262,12 @@
   <section id="booking">
     <div class="container">
       <h2 class="section-title">Bestill konsultasjon</h2>
-      <p class="muted">Velg tidspunkt – dag, kveld eller akutt ved lekkasje. Betaling skjer etterpå. Du oppgir mobil og e‑post, og velger ønsket kontaktplattform: <strong>FaceTime</strong>, <strong>WhatsApp</strong>, <strong>Zoom</strong>, <strong>Microsoft Teams</strong> eller <strong>Google Meet</strong>.</p>
+      <p class="muted">Velg tidspunkt – dag, kveld eller akutt ved lekkasje. Betaling skjer etterpå. Du oppgir mobil og e-post, og velger ønsket kontaktplattform: <strong>FaceTime</strong>, <strong>WhatsApp</strong>, <strong>Zoom</strong>, <strong>Microsoft Teams</strong> eller <strong>Google Meet</strong>.</p>
 
       <div class="cards" style="margin-bottom:16px">
         <div class="card"><h3>Dag • 499 kr</h3><p class="muted">1–30 minutter. 07:00–16:00. Egnet for de fleste.</p><a class="btn" href="#booking" data-action="standard" style="margin-top:8px">Velg dagtid</a></div>
         <div class="card"><h3>Kveld • 599 kr</h3><p class="muted">1–30 minutter. 16:00–21:00.</p><a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Velg kveld</a></div>
-        <div class="card"><h3>Akutt • 699 kr</h3><p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p><a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt‑time</a></div>
+        <div class="card"><h3>Akutt • 699 kr</h3><p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p><a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt-time</a></div>
       </div>
 
       <div class="booking-wrap">
@@ -273,10 +278,12 @@
             <input type="hidden" name="_subject" value="Ny Rørhjelp-forespørsel" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_next" id="fsNext" value="https://otnesbusiness.github.io/#takk" />
+            <!-- Honeypot for spam -->
+            <input type="text" name="_honey" style="display:none">
             
             <div class="form-grid">
               <label class="field"><span>Navn</span><input name="name" type="text" required placeholder="Ola Nordmann"></label>
-              <label class="field"><span>E‑post</span><input name="email" type="email" required placeholder="ola@nordmann.no"></label>
+              <label class="field"><span>E-post</span><input name="email" type="email" required placeholder="ola@nordmann.no"></label>
               <label class="field"><span>Mobil</span><input name="mobil" type="tel" required placeholder="+47 4X XX XX XX"></label>
               
               <fieldset class="field" style="border:0;padding:0;margin:0">
@@ -299,14 +306,14 @@
                 </select>
               </label>
 
-              <label class="field"><span>Dato<\/span>
+              <label class="field"><span>Dato</span>
                 <input type="date" name="dato" required>
-              <\/label>
-              <label class="field"><span>Tid<\/span>
+              </label>
+              <label class="field"><span>Tid</span>
                 <select id="tidSelect" name="tid" required>
-                  <option value="">Velg tid<\/option>
-                <\/select>
-              <\/label>
+                  <option value="">Velg tid</option>
+                </select>
+              </label>
 
               <label class="field full"><span>Beskrivelse (valgfritt)</span>
                 <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg ved lenker til bilder hvis du har"></textarea>
@@ -323,9 +330,6 @@
 
             <p class="notice">Vi sender deg lenke/SMS til valgt plattform før timen starter.</p>
             <button class="btn" type="submit">Send forespørsel</button>
-
-            <!-- Honeypot for spam -->
-            <input type="text" name="_honey" style="display:none">
           </form>
         </div>
       </div>
@@ -336,7 +340,7 @@
     <div class="container">
       <div class="card" style="max-width:620px">
         <h2 class="section-title">Takk for forespørselen!</h2>
-        <p class="muted">Vi sender bekreftelse og lenke\/SMS til valgt plattform.<\/p>
+        <p class="muted">Vi sender bekreftelse og lenke/SMS til valgt plattform.</p>
       </div>
     </div>
   </section>
@@ -350,7 +354,7 @@
       </details>
       <details>
         <summary>Hvordan kobler vi oss opp?</summary>
-        <p>Du legger inn <strong>mobilnummer</strong> og <strong>e‑post</strong>, og velger <em>FaceTime, WhatsApp, Zoom, Microsoft Teams</em> eller <em>Google Meet</em>. Du får deretter en lenke/SMS. Fungerer på både mobil og PC – ingen installasjon nødvendig ved lenke.</p>
+        <p>Du legger inn <strong>mobilnummer</strong> og <strong>e-post</strong>, og velger <em>FaceTime, WhatsApp, Zoom, Microsoft Teams</em> eller <em>Google Meet</em>. Du får deretter en lenke/SMS. Fungerer på både mobil og PC – ingen installasjon nødvendig ved lenke.</p>
       </details>
       <details>
         <summary>Må det være video?</summary>
@@ -365,9 +369,9 @@
         <p>Da sier vi fra. Samtalen gjør at rørlegger vet hva som venter, og besøket blir kortere.</p>
       </details>
       <details>
-        <summary>Betaling og avbestilling<\/summary>
-        <p><strong>Du betaler etter endt konsultasjon.<\/strong> Avbestilling er gratis frem til 1 minutt før avtalen. Ikke‑møtt time refunderes ikke.<\/p>
-      <\/details>
+        <summary>Betaling og avbestilling</summary>
+        <p><strong>Du betaler etter endt konsultasjon.</strong> Avbestilling er gratis frem til 1 minutt før avtalen. Ikke-møtt time refunderes ikke.</p>
+      </details>
     </div>
   </section>
 
@@ -375,7 +379,7 @@
     <div class="container">
       <h2 class="section-title">Kontakt</h2>
       <div class="card" style="max-width:560px">
-        <p>E‑post: <a href="mailto:Otnesrorservice@gmail.com">Otnesrorservice@gmail.com</a></p>
+        <p>E-post: <a href="mailto:Otnesrorservice@gmail.com">Otnesrorservice@gmail.com</a></p>
       </div>
     </div>
   </section>
@@ -393,40 +397,18 @@
             videopris = sel('videopris'), res = sel('resultat');
       function fmt(n){ return 'kr ' + Math.max(0, Math.round(n)).toLocaleString('no-NO'); }
       function calc(){
-        const r = +rate.value||0, u = +oppmote.value||0, tu = +timerUten.value||0, tm = +timerMed.value||0, v = +videopris.value||0;
+        const r = +rate?.value||0, u = +oppmote?.value||0, tu = +timerUten?.value||0, tm = +timerMed?.value||0, v = +videopris?.value||0;
         const uten = u + (tu * r); const med  = v + (tm * r); const spar = uten - med;
-        res.textContent = 'Potensiell besparelse: ' + fmt(spar);
-        res.style.color = spar > 0 ? '#166534' : '#7f1d1d';
+        if(res){ res.textContent = 'Potensiell besparelse: ' + fmt(spar); res.style.color = spar > 0 ? '#166534' : '#7f1d1d'; }
       }
-      [rate, oppmote, timerUten, timerMed, videopris].forEach(el=>el.addEventListener('input', calc));
+      [rate, oppmote, timerUten, timerMed, videopris].forEach(el=>{ if(el) el.addEventListener('input', calc); });
       calc();
     })();
 
-    // --- Knappelogikk + Calendly-innbygging ---
+    // --- Booking logikk ---
     (function(){
-      const CONFIG = {
-        calendlyStandard: "", // f.eks. "https://calendly.com/bruker/dag"
-        calendlyKveld: "",    // f.eks. "https://calendly.com/bruker/kveld"
-        calendlyAkutt: "",    // f.eks. "https://calendly.com/bruker/akutt"
-        akuttPhone: "+47 400 00 000", // <-- Bytt til din faktiske akutt-telefon
-        embedBooking: false
-      };
-      function openCalendly(url){ if(!url){ return false; } window.open(url, "_blank", "noopener"); return true; }
-      document.querySelectorAll('[data-action="standard"]').forEach(btn=>{ btn.addEventListener('click', e=>{ if(openCalendly(CONFIG.calendlyStandard)) e.preventDefault(); }); });
-      document.querySelectorAll('[data-action="kveld"]').forEach(btn=>{ btn.addEventListener('click', e=>{ if(openCalendly(CONFIG.calendlyKveld)) e.preventDefault(); }); });
-      document.querySelectorAll('[data-action="akutt"]').forEach(btn=>{ btn.addEventListener('click', e=>{ if(openCalendly(CONFIG.calendlyAkutt)) e.preventDefault(); }); });
-
-      if(CONFIG.embedBooking && CONFIG.calendlyStandard){
-        const frame = document.getElementById('calendlyFrame');
-        frame.innerHTML = `<iframe title="Booking" class="calendly-iframe" src="${CONFIG.calendlyStandard}?hide_event_type_details=1&hide_gdpr_banner=1" style="width:100%;min-height:740px;border:0"></iframe>`;
-        const fallback = document.getElementById('fallbackCal');
-        fallback.style.display = 'inline-flex';
-        fallback.href = CONFIG.calendlyStandard; fallback.target = '_blank'; fallback.rel = 'noopener';
-      }
-
-      // Koble kort-knappene til skjemavalget
       function setTypeAndScroll(t){
-        const r = document.querySelector(`input[name="type"][value="${t}"]`);
+        const r = document.querySelector('input[name="type"][value="'+t+'"]');
         if(r){ r.checked = true; r.dispatchEvent(new Event('change')); }
         document.getElementById('bookingForm').scrollIntoView({behavior:'smooth'});
       }
@@ -434,19 +416,26 @@
       document.querySelectorAll('[data-action="kveld"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Kveld')));
       document.querySelectorAll('[data-action="akutt"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Akutt')));
 
-      // Akutt-boks logikk
+      // Akutt-boks vis/skjul
       const akuttBox = document.getElementById('akuttBox');
       const akuttTel = document.getElementById('akuttTel');
-      if(akuttTel){ akuttTel.textContent = CONFIG.akuttPhone; akuttTel.href = 'tel:' + CONFIG.akuttPhone.replace(/\s+/g,''); }
+      const AKUTT_PHONE = '+47 400 00 000'; // bytt når klart
+      if(akuttTel){ akuttTel.textContent = AKUTT_PHONE; akuttTel.href = 'tel:' + AKUTT_PHONE.replace(/\s+/g,''); }
       document.querySelectorAll('input[name="type"]').forEach(r=>{
         r.addEventListener('change', ()=>{
-          akuttBox.style.display = (r.value === 'Akutt' && r.checked) ? 'flex' : 'none';
+          const v = document.querySelector('input[name="type"]:checked')?.value;
+          if(akuttBox) akuttBox.style.display = (v==='Akutt') ? 'flex' : 'none';
+          applyRangeByType(v||'Dag');
+          // Påkrav: kun krav til dato/tid når ikke Akutt
+          const req = (v !== 'Akutt');
+          const datoInp = document.querySelector('input[name="dato"]');
+          const tidSel = document.getElementById('tidSelect');
+          if(datoInp) datoInp.required = req; if(tidSel) tidSel.required = req;
         });
       });
 
-      // Tid-velger (mer brukervennlig): bygg 15-min intervaller og juster etter type
+      // Tid-velger: 15-min intervaller etter type
       const tidSel = document.getElementById('tidSelect');
-      const datoInp = document.querySelector('input[name="dato"]');
       function buildTimes(startHour, endHour){
         if(!tidSel) return;
         tidSel.innerHTML = '<option value="">Velg tid</option>';
@@ -465,18 +454,12 @@
       function applyRangeByType(val){
         if(val==='Dag'){ buildTimes(7,16); }
         else if(val==='Kveld'){ buildTimes(16,21); }
-        else{ buildTimes(7,21); }
-        const req = (val !== 'Akutt');
-        if(datoInp){ datoInp.required = req; }
-        if(tidSel){ tidSel.required = req; }
+        else { buildTimes(7,21); }
       }
       const checked = document.querySelector('input[name="type"]:checked');
       applyRangeByType(checked ? checked.value : 'Dag');
-      document.querySelectorAll('input[name="type"]').forEach(r=>{
-        r.addEventListener('change', ()=> applyRangeByType(r.value));
-      });
 
-      // FormSubmit: sett _next til takk-anker på nåværende URL
+      // Redirect til #takk ved innsending (FormSubmit)
       const form = document.getElementById('bookingForm');
       if(form){
         form.addEventListener('submit', function(){
