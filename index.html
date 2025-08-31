@@ -68,6 +68,17 @@
     .save{display:flex;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;box-shadow:var(--shadow)}
     .save strong{color:#166534}
 
+    /* --- FORM GRID (to kolonner på desktop) --- */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-grid .full{grid-column:1 / -1}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field input,.field select,.field textarea{padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit}
+    .placeholder{visibility:hidden}
+
+    /* Takk-seksjon: skjult med mindre #takk i URL */
+    #takk{display:none}
+    #takk:target{display:block}
+
     /* Mobil */
     @media (max-width:920px){
       .grid-hero{grid-template-columns:1fr}
@@ -85,9 +96,7 @@
     <div class="container nav">
       <div class="brand">
         <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Rørhjelp logo">
-          <defs>
-            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7cc5eb"/><stop offset="1" stop-color="#cfefff"/></linearGradient>
-          </defs>
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7cc5eb"/><stop offset="1" stop-color="#cfefff"/></linearGradient></defs>
           <rect x="2" y="2" width="60" height="60" rx="12" ry="12" fill="#ffffff"/>
           <circle cx="32" cy="32" r="24" fill="url(#lg)"/>
           <path d="M32 18c-5 6-8 10-8 14a8 8 0 0016 0c0-4-3-8-8-14z" fill="#ffffff" opacity=".95"/>
@@ -102,8 +111,6 @@
       <nav class="menu" aria-label="Hovedmeny">
         <a href="#hvordan">Slik fungerer det</a>
         <a href="#hvorfor">Hvorfor digitalt først</a>
-        <!-- Fjernet: <a href="#priser">Pris</a> -->
-        <!-- Fjernet: <a href="#kalkulator">Spar-kalkulator</a> -->
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -191,9 +198,7 @@
     </div>
   </section>
 
-  <!-- Fjernet hele PRIS-seksjonen (#priser) som i skjermbildet -->
-
-  <!-- Fjernet hele SPAR-KALKULATOR-seksjonen (#kalkulator) -->
+  <!-- Fjernet PRIS og KALKULATOR -->
 
   <section id="booking">
     <div class="container">
@@ -220,8 +225,8 @@
             <div class="form-grid">
               <label class="field"><span>Navn</span><input name="name" type="text" required placeholder="Ola Nordmann"></label>
               <label class="field"><span>E-post</span><input name="email" type="email" required placeholder="ola@nordmann.no"></label>
-              <label class="field"><span>Mobil</span><input name="mobil" type="tel" required placeholder="+47 4X XX XX XX"></label>
 
+              <label class="field"><span>Mobil</span><input name="mobil" type="tel" required placeholder="+47 4X XX XX XX"></label>
               <fieldset class="field" style="border:0;padding:0;margin:0">
                 <span>Type</span>
                 <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -241,15 +246,17 @@
                   <option>Google Meet</option>
                 </select>
               </label>
-
               <label class="field"><span>Dato</span>
                 <input type="date" name="dato" required>
               </label>
+
               <label class="field"><span>Tid</span>
                 <select id="tidSelect" name="tid" required>
                   <option value="">Velg tid</option>
                 </select>
               </label>
+              <!-- tom plass for høyre kolonne slik at Beskrivelse starter på ny rad -->
+              <div class="placeholder" aria-hidden="true"></div>
 
               <label class="field full"><span>Beskrivelse (valgfritt)</span>
                 <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg ved lenker til bilder hvis du har"></textarea>
@@ -326,13 +333,12 @@
 
   <script>
     // --- Booking: ENKEL KONFIG FOR ÅPNINGSTIDER & INTERVALL ---
-    // Endre tider her (inkluderer slutt-timen). Intervall i minutter.
     const BOOKING_CONF = {
       intervalMin: 15,
       ranges: {
         Dag:   { start: 7,  end: 16 },
         Kveld: { start: 16, end: 21 },
-        Akutt: { start: 7,  end: 21 } // fallback/fullt spekter
+        Akutt: { start: 7,  end: 21 }
       },
       akuttPhone: '+47 400 00 000'
     };
@@ -348,7 +354,7 @@
       document.querySelectorAll('[data-action="kveld"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Kveld')));
       document.querySelectorAll('[data-action="akutt"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Akutt')));
 
-      // Akutt-boks vis/skjul + telefon
+      // Akutt-boks + telefon
       const akuttBox = document.getElementById('akuttBox');
       const akuttTel = document.getElementById('akuttTel');
       if(akuttTel){
@@ -360,7 +366,7 @@
           const v = document.querySelector('input[name="type"]:checked')?.value || 'Dag';
           if(akuttBox) akuttBox.style.display = (v==='Akutt') ? 'flex' : 'none';
           applyRangeByType(v);
-          // Dato/tid kreves ikke for Akutt
+          // Dato/tid er ikke påkrevd for Akutt
           const req = (v !== 'Akutt');
           const datoInp = document.querySelector('input[name="dato"]');
           const tidSel = document.getElementById('tidSelect');
@@ -368,7 +374,7 @@
         });
       });
 
-      // Tid-velger bygges fra konfig
+      // Tid-velger
       const tidSel = document.getElementById('tidSelect');
       function buildTimes(range){
         if(!tidSel || !range) return;
