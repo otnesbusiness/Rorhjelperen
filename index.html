@@ -267,13 +267,28 @@
       <div class="booking-wrap">
         <div class="booking-head"><strong>Booking</strong><a class="btn" href="#" id="fallbackCal" style="display:none">Åpne i nytt vindu</a></div>
         <div class="booking-body" id="calendlyFrame" aria-live="polite">
-          <form id="bookingForm" style="padding:16px">
+          <form id="bookingForm" action="https://formsubmit.co/otnesror@gmail.com" method="POST" style="padding:16px">
+            <!-- FormSubmit: basic settings -->
+            <input type="hidden" name="_subject" value="Ny Rørhjelp-forespørsel" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" id="fsNext" value="" />
+            
             <div class="form-grid">
-              <label class="field"><span>Navn</span><input type="text" required placeholder="Ola Nordmann"></label>
-              <label class="field"><span>E‑post</span><input type="email" required placeholder="ola@nordmann.no"></label>
-              <label class="field"><span>Mobil</span><input type="tel" required placeholder="+47 4X XX XX XX"></label>
+              <label class="field"><span>Navn</span><input name="navn" type="text" required placeholder="Ola Nordmann"></label>
+              <label class="field"><span>E‑post</span><input name="epost" type="email" required placeholder="ola@nordmann.no"></label>
+              <label class="field"><span>Mobil</span><input name="mobil" type="tel" required placeholder="+47 4X XX XX XX"></label>
+              
+              <fieldset class="field" style="border:0;padding:0;margin:0">
+                <span>Type</span>
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+                  <label><input type="radio" name="type" value="Dag" required> Dag</label>
+                  <label><input type="radio" name="type" value="Kveld"> Kveld</label>
+                  <label><input type="radio" name="type" value="Akutt" id="typeAkutt"> Akutt</label>
+                </div>
+              </fieldset>
+
               <label class="field"><span>Foretrukket plattform</span>
-                <select id="plattform" required>
+                <select id="plattform" name="plattform" required>
                   <option value="">Velg</option>
                   <option>FaceTime</option>
                   <option>WhatsApp</option>
@@ -282,12 +297,40 @@
                   <option>Google Meet</option>
                 </select>
               </label>
-              <label class="field full"><span>Beskrivelse (valgfritt)</span><textarea rows="3" placeholder="Kort om problemet + legg ved lenker til bilder hvis du har"></textarea></label>
+
+              <label class="field"><span>Dato og tidspunkt</span>
+                <input type="datetime-local" name="starttid" required>
+              </label>
+
+              <label class="field full"><span>Beskrivelse (valgfritt)</span>
+                <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg ved lenker til bilder hvis du har"></textarea>
+              </label>
             </div>
+
+            <div id="akuttBox" class="save" style="display:none;margin-top:12px;background:#fff7ed;border-color:#fed7aa">
+              <div aria-hidden="true">📞</div>
+              <div>
+                <strong>Akutt?</strong> Ring oss med en gang: <a id="akuttTel" href="tel:+4740000000">+47 400 00 000</a>.
+                Vi svarer så fort vi kan. Send gjerne skjemaet også for oppsummering.
+              </div>
+            </div>
+
             <p class="notice">Vi sender deg lenke/SMS til valgt plattform før timen starter.</p>
             <button class="btn" type="submit">Send forespørsel</button>
+
+            <!-- Honeypot for spam -->
+            <input type="text" name="_honey" style="display:none">
           </form>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="takk" style="display:block">
+    <div class="container">
+      <div class="card" style="max-width:620px">
+        <h2 class="section-title">Takk for forespørselen!</h2>
+        <p class="muted">Vi sender bekreftelse og lenke/SMS til valgt plattform. Trenger du oss <strong>akutt</strong>? Ring <a href="tel:+4740000000" id="takkAkutt">+47 400 00 000</a>.</p>
       </div>
     </div>
   </section>
@@ -359,6 +402,7 @@
         calendlyStandard: "", // f.eks. "https://calendly.com/bruker/dag"
         calendlyKveld: "",    // f.eks. "https://calendly.com/bruker/kveld"
         calendlyAkutt: "",    // f.eks. "https://calendly.com/bruker/akutt"
+        akuttPhone: "+47 400 00 000", // <-- Bytt til din faktiske akutt-telefon
         embedBooking: false
       };
       function openCalendly(url){ if(!url){ return false; } window.open(url, "_blank", "noopener"); return true; }
@@ -374,17 +418,36 @@
         fallback.href = CONFIG.calendlyStandard; fallback.target = '_blank'; fallback.rel = 'noopener';
       }
 
-      // Demo-submit for boksskjema
+      // Koble kort-knappene til skjemavalget
+      function setTypeAndScroll(t){
+        const r = document.querySelector(`input[name="type"][value="${t}"]`);
+        if(r){ r.checked = true; r.dispatchEvent(new Event('change')); }
+        document.getElementById('bookingForm').scrollIntoView({behavior:'smooth'});
+      }
+      document.querySelectorAll('[data-action="standard"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Dag')));
+      document.querySelectorAll('[data-action="kveld"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Kveld')));
+      document.querySelectorAll('[data-action="akutt"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Akutt')));
+
+      // Akutt-boks logikk
+      const akuttBox = document.getElementById('akuttBox');
+      const akuttTel = document.getElementById('akuttTel');
+      if(akuttTel){ akuttTel.textContent = CONFIG.akuttPhone; akuttTel.href = 'tel:' + CONFIG.akuttPhone.replace(/\s+/g,''); }
+      document.querySelectorAll('input[name="type"]').forEach(r=>{
+        r.addEventListener('change', ()=>{
+          akuttBox.style.display = (r.value === 'Akutt' && r.checked) ? 'flex' : 'none';
+        });
+      });
+
+      // FormSubmit: sett _next til takk-anker på nåværende URL
       const form = document.getElementById('bookingForm');
       if(form){
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          alert('Takk! Vi bekrefter tidspunkt og sender lenke/SMS til valgt plattform.');
-          form.reset();
+        form.addEventListener('submit', function(){
+          const next = document.getElementById('fsNext');
+          if(next){ next.value = window.location.href.split('#')[0] + '#takk'; }
         });
       }
 
-      document.getElementById('y').textContent = new Date().getFullYear();
+      document.getElementById('y'.textContent = new Date().getFullYear();
     })();
   </script>
 </body>
