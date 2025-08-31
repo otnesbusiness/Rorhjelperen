@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rørhjelp – digital konsultasjon som sparer deg penger</title>
-  <meta name="description" content="Bestill digital rørleggerkonsultasjon – video eller bilder holder ofte. Betal etter endt samtale. Fornøyd‑garanti: Får du ikke hjelpen du trenger, refunderer vi beløpet." />
+  <meta name="description" content="Bestill digital rørleggerkonsultasjon – video eller bilder holder ofte. Betal etter endt samtale." />
   <style>
     :root{
       --brand:#7cc5eb; --brand-2:#cfefff;
@@ -94,7 +94,8 @@
       .form-grid{grid-template-columns:1fr}
     }
     @media (max-width:560px){ .cards{grid-template-columns:1fr} .menu{display:none} }
-  </style>
+  #takk:target{display:block}
+  <\/style>
   <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%237cc5eb"/><stop offset="1" stop-color="%23cfefff"/></linearGradient></defs><rect rx="12" ry="12" width="64" height="64" fill="white"/><circle cx="32" cy="32" r="26" fill="url(%23g)"/><path d="M35 19l-7 9a6 6 0 108 8l9-7-3-3-4 3-3-3 3-4-3-3z" fill="white"/></svg>' />
 </head>
 <body>
@@ -136,8 +137,7 @@
         <p class="lead">Rask diagnose og konkrete steg. Ofte nok til å stoppe lekkasje eller gjøre et fysisk besøk kortere og billigere.</p>
         <p class="lead" style="margin-top:0">Vi kan også gi <strong>steg‑for‑steg veiledning</strong> slik at du gjør det selv når det er <em>lovlig</em> – f.eks. tømme/åpne ved sluk eller sikre midlertidig.</p>
 
-        <div class="save" role="note" aria-label="Fornøyd‑garanti">
-          <div aria-hidden="true">✅</div>
+        
           <div><strong>Fornøyd‑garanti:</strong> Får du ikke hjelpen du trenger, <u>refunderer vi beløpet</u>.</div>
         </div>
 
@@ -157,7 +157,7 @@
 
         <div class="badges">
           <span class="pill">Betal etterpå</span>
-          <span class="pill">Fornøyd‑garanti</span>
+          
           <span class="pill">Mobil eller PC</span>
         </div>
       </div>
@@ -177,7 +177,7 @@
           <a class="btn sm ok" href="#booking" data-action="kveld" style="justify-content:center">Kveld • 599 kr (16–21)</a>
           <a class="btn sm warn" href="#booking" data-action="akutt" style="justify-content:center">Akutt • 699 kr (svar ≤1 t)</a>
         </div>
-        <p class="note"><strong>Betal etter endt konsultasjon.</strong> Fornøyd‑garanti: Får du ikke hjelpen du trenger, refunderer vi beløpet.</p>
+        <p class="note"><strong>Betal etter endt konsultasjon.<\/strong><\/p>
       </aside>
     </div>
   </section>
@@ -231,7 +231,7 @@
         <div class="card"><h3>Kveld • 599 kr</h3><p class="muted">1–30 minutter. 16:00–21:00. Når det ikke kan vente til i morgen.</p><a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Bestill kveld</a></div>
         <div class="card"><h3>Akutt • 699 kr</h3><p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p><a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt</a></div>
       </div>
-      <p class="notice">Alle priser inkl. mva. <strong>Betaling etter endt konsultasjon.</strong> Fornøyd‑garanti gjelder.</p>
+      <p class="notice">Alle priser inkl. mva. <strong>Betaling etter endt konsultasjon.<\/strong><\/p>
     </div>
   </section>
 
@@ -298,9 +298,14 @@
                 </select>
               </label>
 
-              <label class="field"><span>Dato og tidspunkt</span>
-                <input type="datetime-local" name="starttid" required>
-              </label>
+              <label class=\"field\"><span>Dato<\/span>
+                <input type=\"date\" name=\"dato\" required>
+              <\/label>
+              <label class=\"field\"><span>Tid<\/span>
+                <select id=\"tidSelect\" name=\"tid\" required>
+                  <option value=\"\">Velg tid<\/option>
+                <\/select>
+              <\/label>
 
               <label class="field full"><span>Beskrivelse (valgfritt)</span>
                 <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg ved lenker til bilder hvis du har"></textarea>
@@ -326,11 +331,11 @@
     </div>
   </section>
 
-  <section id="takk" style="display:block">
+  <section id="takk" style="display:none">
     <div class="container">
       <div class="card" style="max-width:620px">
         <h2 class="section-title">Takk for forespørselen!</h2>
-        <p class="muted">Vi sender bekreftelse og lenke/SMS til valgt plattform. Trenger du oss <strong>akutt</strong>? Ring <a href="tel:+4740000000" id="takkAkutt">+47 400 00 000</a>.</p>
+        <p class="muted">Vi sender bekreftelse og lenke\/SMS til valgt plattform.<\/p>
       </div>
     </div>
   </section>
@@ -359,9 +364,9 @@
         <p>Da sier vi fra. Samtalen gjør at rørlegger vet hva som venter, og besøket blir kortere.</p>
       </details>
       <details>
-        <summary>Betaling, garanti og avbestilling</summary>
-        <p><strong>Du betaler etter endt konsultasjon.</strong> <strong>Fornøyd‑garanti:</strong> Får du ikke hjelpen du trenger, refunderer vi beløpet. Avbestilling er gratis frem til 1 minutt før avtalen. Ikke‑møtt time refunderes ikke.</p>
-      </details>
+        <summary>Betaling og avbestilling<\/summary>
+        <p><strong>Du betaler etter endt konsultasjon.<\/strong> Avbestilling er gratis frem til 1 minutt før avtalen. Ikke‑møtt time refunderes ikke.<\/p>
+      <\/details>
     </div>
   </section>
 
@@ -436,6 +441,38 @@
         r.addEventListener('change', ()=>{
           akuttBox.style.display = (r.value === 'Akutt' && r.checked) ? 'flex' : 'none';
         });
+      });
+
+      // Tid-velger (mer brukervennlig): bygg 15-min intervaller og juster etter type
+      const tidSel = document.getElementById('tidSelect');
+      const datoInp = document.querySelector('input[name="dato"]');
+      function buildTimes(startHour, endHour){
+        if(!tidSel) return;
+        tidSel.innerHTML = '<option value="">Velg tid</option>';
+        for(let h=startHour; h<=endHour; h++){
+          for(let m=0; m<60; m+=15){
+            if(h===endHour && m>0) break;
+            const hh = String(h).padStart(2,'0');
+            const mm = String(m).padStart(2,'0');
+            const t = hh + ':' + mm;
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            tidSel.appendChild(opt);
+          }
+        }
+      }
+      function applyRangeByType(val){
+        if(val==='Dag'){ buildTimes(7,16); }
+        else if(val==='Kveld'){ buildTimes(16,21); }
+        else{ buildTimes(7,21); }
+        const req = (val !== 'Akutt');
+        if(datoInp){ datoInp.required = req; }
+        if(tidSel){ tidSel.required = req; }
+      }
+      const checked = document.querySelector('input[name="type"]:checked');
+      applyRangeByType(checked ? checked.value : 'Dag');
+      document.querySelectorAll('input[name="type"]').forEach(r=>{
+        r.addEventListener('change', ()=> applyRangeByType(r.value));
       });
 
       // FormSubmit: sett _next til takk-anker på nåværende URL
