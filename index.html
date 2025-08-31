@@ -75,6 +75,11 @@
     .field input,.field select,.field textarea{padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit}
     .placeholder{visibility:hidden}
 
+    /* Opplasting */
+    .drop{border:2px dashed var(--border);border-radius:12px;padding:16px;text-align:center}
+    .drop.dragover{background:#f8fafc}
+    .filelist{font-size:12px;color:var(--muted);margin-top:6px}
+
     /* Takk-seksjon: skjult med mindre #takk i URL */
     #takk{display:none}
     #takk:target{display:block}
@@ -121,7 +126,8 @@
   <section class="hero">
     <div class="container grid-hero">
       <div>
-        <span class="badge">Norskregistrert, autorisert rørlegger</span>
+        <!-- Endret badge-tekst: fjernet "Norskregistrert" -->
+        <span class="badge">Autorisert rørlegger</span>
         <h1>Spar penger med rørlegger digitalt – <span style="color:var(--brand)">video eller bilder</span></h1>
         <p class="lead">Rask diagnose og konkrete steg. Ofte nok til å stoppe lekkasje eller gjøre et fysisk besøk kortere og billigere.</p>
         <p class="lead" style="margin-top:0">Vi kan også gi <strong>steg-for-steg veiledning</strong> slik at du gjør det selv når det er <em>lovlig</em> – f.eks. tømme/åpne ved sluk eller sikre midlertidig.</p>
@@ -131,10 +137,7 @@
           <div><strong>Må ikke være video:</strong> Ofte holder det med <strong>bilder</strong> + kort beskrivelse. Vi sier hvilke bilder vi trenger og hva du bør opplyse til rørlegger.</div>
         </div>
 
-        <div class="badges">
-          <span class="pill">Betal etterpå</span>
-          <span class="pill">Mobil eller PC</span>
-        </div>
+        <!-- Fjernet "Betal etterpå" og "Mobil eller PC" badges -->
       </div>
 
       <aside class="hero-card hero-aside" aria-label="Pris og bestilling">
@@ -198,23 +201,17 @@
     </div>
   </section>
 
-  <!-- Fjernet PRIS og KALKULATOR -->
-
   <section id="booking">
     <div class="container">
       <h2 class="section-title">Bestill konsultasjon</h2>
       <p class="muted">Velg tidspunkt – dag, kveld eller akutt ved lekkasje. Betaling skjer etterpå. Du oppgir mobil og e-post, og velger ønsket kontaktplattform: <strong>FaceTime</strong>, <strong>WhatsApp</strong>, <strong>Zoom</strong>, <strong>Microsoft Teams</strong> eller <strong>Google Meet</strong>.</p>
 
-      <div class="cards" style="margin-bottom:16px">
-        <div class="card"><h3>Dag • 499 kr</h3><p class="muted">1–30 minutter. 07:00–16:00. Egnet for de fleste.</p><a class="btn" href="#booking" data-action="standard" style="margin-top:8px">Velg dagtid</a></div>
-        <div class="card"><h3>Kveld • 599 kr</h3><p class="muted">1–30 minutter. 16:00–21:00.</p><a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Velg kveld</a></div>
-        <div class="card"><h3>Akutt • 699 kr</h3><p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p><a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt-time</a></div>
-      </div>
+      <!-- Fjernet priskort-blokken (bilde nr. 2 i skjermdump) -->
 
       <div class="booking-wrap">
         <div class="booking-head"><strong>Booking</strong><a class="btn" href="#" id="fallbackCal" style="display:none">Åpne i nytt vindu</a></div>
         <div class="booking-body" id="calendlyFrame" aria-live="polite">
-          <form id="bookingForm" action="https://formsubmit.co/otnesror@gmail.com" method="POST" style="padding:16px">
+          <form id="bookingForm" action="https://formsubmit.co/otnesror@gmail.com" method="POST" enctype="multipart/form-data" style="padding:16px">
             <!-- FormSubmit: basic settings -->
             <input type="hidden" name="_subject" value="Ny Rørhjelp-forespørsel" />
             <input type="hidden" name="_captcha" value="false" />
@@ -259,8 +256,20 @@
               <div class="placeholder" aria-hidden="true"></div>
 
               <label class="field full"><span>Beskrivelse (valgfritt)</span>
-                <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg ved lenker til bilder hvis du har"></textarea>
+                <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg gjerne ved bilder nedenfor"></textarea>
               </label>
+
+              <!-- Ny: opplasting av bilder -->
+              <div class="full">
+                <label class="field">
+                  <span>Bilder (valgfritt)</span>
+                  <div id="drop" class="drop" tabindex="0">Slipp filer her eller <u>velg</u>
+                    <input id="bilder" name="attachments[]" accept="image/*" type="file" multiple style="display:none" />
+                  </div>
+                  <div id="filelist" class="filelist" aria-live="polite"></div>
+                  <small class="muted">Du kan laste opp flere bilder (JPG, PNG, HEIC). Maks 10 MB per fil anbefales.</small>
+                </label>
+              </div>
             </div>
 
             <div id="akuttBox" class="save" style="display:none;margin-top:12px;background:#fff7ed;border-color:#fed7aa">
@@ -328,7 +337,7 @@
   </section>
 
   <footer>
-    <div class="container">© <span id="y"></span> Rørhjelp. Norskregistrert, autorisert rørlegger.</div>
+    <div class="container">© <span id="y"></span> Rørhjelp. Autorisert rørlegger.</div>
   </footer>
 
   <script>
@@ -405,6 +414,27 @@
           const next = document.getElementById('fsNext');
           if(next){ next.value = window.location.href.split('#')[0] + '#takk'; }
         });
+      }
+
+      // Opplasting: klikk/drag & drop + fil-liste
+      const drop = document.getElementById('drop');
+      const fileInput = document.getElementById('bilder');
+      const fileList = document.getElementById('filelist');
+      if(drop && fileInput){
+        drop.addEventListener('click', ()=> fileInput.click());
+        drop.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); fileInput.click(); }});
+        ;['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.add('dragover'); }));
+        ;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.remove('dragover'); }));
+        drop.addEventListener('drop', e=>{
+          if(e.dataTransfer?.files){ fileInput.files = e.dataTransfer.files; renderFiles(); }
+        });
+        fileInput.addEventListener('change', renderFiles);
+      }
+      function renderFiles(){
+        if(!fileList || !fileInput?.files) return;
+        if(fileInput.files.length===0){ fileList.textContent = ''; return; }
+        const names = Array.from(fileInput.files).map(f=>`${f.name} (${Math.round(f.size/1024)} kB)`);
+        fileList.textContent = names.join(' • ');
       }
 
       document.getElementById('y').textContent = new Date().getFullYear();
