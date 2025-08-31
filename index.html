@@ -80,6 +80,11 @@
     .drop.dragover{background:#f8fafc}
     .filelist{font-size:12px;color:var(--muted);margin-top:6px}
 
+    /* Mobilvennlig filinput (for iOS/Android): gjem input uten display:none */
+    .file-input{position:absolute;width:0.1px;height:0.1px;opacity:0;overflow:hidden;z-index:-1}
+    .file-button{display:inline-flex;align-items:center;gap:8px}
+    .file-error{font-size:12px;color:#b91c1c;margin-top:6px}
+
     /* Takk-seksjon: skjult med mindre #takk i URL */
     #takk{display:none}
     #takk:target{display:block}
@@ -259,13 +264,17 @@
                 <textarea name="beskrivelse" rows="3" placeholder="Kort om problemet + legg gjerne ved bilder nedenfor"></textarea>
               </label>
 
-              <!-- Ny: opplasting av bilder -->
+              <!-- Ny: opplasting av bilder (mobil-vennlig) -->
               <div class="full">
-                <label class="field">
+                <div class="field">
                   <span>Bilder (valgfritt)</span>
-                  <div id="drop" class="drop" tabindex="0">Slipp filer her eller <u>velg</u>
-                    <input id="bilder" name="attachments[]" accept="image/*" type="file" multiple style="display:none" />
-                  </div>
+                  <input id="bilder" class="file-input" name="attachments[]" accept="image/*,image/heic,image/heif" type="file" multiple capture="environment" />
+                  <label for="bilder" class="btn secondary file-button" aria-controls="filelist">Velg / ta bilder</label>
+                  <div id="filelist" class="filelist" aria-live="polite"></div>
+                  <div id="fileError" class="file-error" aria-live="polite"></div>
+                  <small class="muted">Du kan laste opp flere bilder (JPG, PNG, HEIC). Maks 10–12 MB per fil anbefales.</small>
+                </div>
+              </div>
                   <div id="filelist" class="filelist" aria-live="polite"></div>
                   <small class="muted">Du kan laste opp flere bilder (JPG, PNG, HEIC). Maks 10 MB per fil anbefales.</small>
                 </label>
@@ -416,25 +425,25 @@
         });
       }
 
-      // Opplasting: klikk/drag & drop + fil-liste
-      const drop = document.getElementById('drop');
+      // Opplasting: mobil-trygg (label->file input) + fil-liste
       const fileInput = document.getElementById('bilder');
       const fileList = document.getElementById('filelist');
-      if(drop && fileInput){
-        drop.addEventListener('click', ()=> fileInput.click());
-        drop.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); fileInput.click(); }});
-        ;['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.add('dragover'); }));
-        ;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.remove('dragover'); }));
-        drop.addEventListener('drop', e=>{
-          if(e.dataTransfer?.files){ fileInput.files = e.dataTransfer.files; renderFiles(); }
+      const fileErr = document.getElementById('fileError');
+      if(fileInput){
+        fileInput.addEventListener('change', ()=>{
+          if(fileErr) fileErr.textContent = '';
+          const files = Array.from(fileInput.files || []);
+          if(!files.length){ if(fileList) fileList.textContent=''; return; }
+          const tooBig = files.find(f=> f.size > 12*1024*1024);
+          if(tooBig){
+            if(fileErr) fileErr.textContent = `${tooBig.name} er større enn 12 MB. Velg en mindre fil.`;
+            fileInput.value='';
+            if(fileList) fileList.textContent='';
+            return;
+          }
+          const names = files.map(f=>`${f.name} (${Math.round(f.size/1024)} kB)`);
+          if(fileList) fileList.textContent = names.join(' • ');
         });
-        fileInput.addEventListener('change', renderFiles);
-      }
-      function renderFiles(){
-        if(!fileList || !fileInput?.files) return;
-        if(fileInput.files.length===0){ fileList.textContent = ''; return; }
-        const names = Array.from(fileInput.files).map(f=>`${f.name} (${Math.round(f.size/1024)} kB)`);
-        fileList.textContent = names.join(' • ');
       }
 
       document.getElementById('y').textContent = new Date().getFullYear();
