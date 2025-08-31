@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rørhjelp – videokonsultasjon med autorisert rørlegger</title>
-  <meta name="description" content="Få rørleggerens råd på video. Unngå unødvendig utrykning – få diagnose og konkrete steg på minutter. Bestill videokonsultasjon nå for 499 kr." />
+  <title>Rørhjelp – videokonsultasjon som sparer deg penger</title>
+  <meta name="description" content="Få rørleggerens råd på video – unngå unødvendig utrykning og spar 1 000–5 000 kr. Rask diagnose og konkrete steg på minutter. Bestill videokonsultasjon nå." />
   <style>
     :root{
       --brand:#0ea5e9;--brand-2:#7dd3fc;--text:#0f172a;--muted:#475569;--bg:#f8fafc;
@@ -27,6 +27,7 @@
     .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;border:none;border-radius:14px;padding:12px 16px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 8px 24px rgba(14,165,233,.35)}
     .btn.secondary{background:#e2e8f0;color:#0f172a;box-shadow:none}
     .btn.warn{background:var(--warn)}
+    .btn.ok{background:var(--ok)}
     .btn:active{transform:translateY(1px)}
     .hero{padding:56px 0}
     .grid-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
@@ -52,21 +53,23 @@
     footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted)}
     .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .pill{font-size:12px;border:1px solid #bbf7d0;background:#f0fdf4;color:#166534;border-radius:999px;padding:6px 10px}
-    @media (max-width:920px){.grid-hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}}
+    .save{display:flex;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;box-shadow:var(--shadow)}
+    .save strong{color:#166534}
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .compare .mini{background:#fff;border:1px dashed var(--border);border-radius:12px;padding:12px}
+    .compare .mini h4{margin:0 0 4px;font-size:14px}
+    .kalk-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
+    .kalk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .kalk-grid label{font-size:13px;color:var(--muted)}
+    .kalk-result{margin-top:10px;font-weight:800}
+    .notice{font-size:12px;color:var(--muted);margin-top:6px}
+    @media (max-width:920px){.grid-hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.compare{grid-template-columns:1fr}}
     @media (max-width:560px){.cards{grid-template-columns:1fr}.menu{display:none}}
   </style>
   <link rel="icon" href="logo.png" />
 </head>
 <body>
-  <!-- KONFIG: Legg inn Calendly-lenker her om du vil åpne direkte / bygge inn -->
-  <script>
-    const CONFIG = {
-      calendlyStandard: "",  // f.eks. "https://calendly.com/bruker/standard"
-      calendlyAkutt: "",     // f.eks. "https://calendly.com/bruker/akutt"
-      embedBooking: false    // sett true for å bygge inn standard i iframen under
-    };
-  </script>
-
+  <!-- KONFIG: Legg inn Calendly-lenker nederst i <script> -->
   <header>
     <div class="container nav">
       <div class="brand">
@@ -77,6 +80,7 @@
         <a href="#hvordan">Slik fungerer det</a>
         <a href="#hvorfor">Hvorfor video</a>
         <a href="#priser">Pris</a>
+        <a href="#kalkulator">Spar-kalkulator</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -88,36 +92,53 @@
     <div class="container grid-hero">
       <div>
         <span class="badge">Norskregistrert, autorisert rørlegger</span>
-        <h1>Rørlegger på <span style="color:var(--brand)">video</span> – få hjelp hjemmefra</h1>
-        <p class="lead">Unngå unødvendig utrykning. Få diagnose og konkrete steg på minutter.</p>
+        <h1>Spar penger med rørlegger på <span style="color:var(--brand)">video</span></h1>
+        <p class="lead">Rask diagnose og konkrete steg – ofte nok til å løse problemet eller gjøre besøket kortere og billigere.</p>
+
+        <div class="save" role="note" aria-label="Kostnadsbesparelse">
+          <div aria-hidden="true">💡</div>
+          <div>
+            <strong>Spar 1 000–5 000 kr</strong> ved å <u>unngå bomtur</u> og sørge for at rørleggeren møter <u>forberedt</u> med riktige deler.
+          </div>
+        </div>
+
+        <div class="compare" aria-label="Sammenligning">
+          <div class="mini">
+            <h4>Uten video først</h4>
+            <p class="muted">Oppmøte + feilsøk + hente deler → 2–3 timer</p>
+          </div>
+          <div class="mini">
+            <h4>Med video først</h4>
+            <p class="muted">Rett diagnose + deleliste → 0,5–1,5 timer</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <a class="btn" href="#booking" data-action="standard">Velg tidspunkt (07–16)</a>
+          <a class="btn ok" href="#booking" data-action="kveld">Kveld (16–21)</a>
+          <a class="btn warn" href="#booking" data-action="akutt">Akutt (≤1 t)</a>
+        </div>
+
         <div class="badges">
           <span class="pill">Fornøyd-garanti</span>
-          <span class="pill">1–30 min konsultasjon</span>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
-          <a class="btn" href="#booking" data-action="standard">Velg tidspunkt</a>
-          <a class="btn warn" href="#booking" data-action="akutt">Akutt lekkasje (≤1 t) – 699 kr</a>
-          <a class="btn secondary" href="#priser">Se pris</a>
-        </div>
-        <div style="margin-top:12px;background:#ecfeff;border:1px solid #bae6fd;border-radius:12px;padding:12px;box-shadow:var(--shadow)">
-          <strong>Skal rørlegger komme?</strong> Forbered deg først: Vit hva du skal si og hva han bør ta med. Ofte reduserer det regningen betydelig – typisk 1 000–5 000 kr.
-        </div>
-        <div style="margin-top:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;box-shadow:var(--shadow)">
-          <strong>Fornøyd-garanti:</strong> Får du ikke hjelpen du trenger, refunderer vi beløpet.
+          <span class="pill">1–30 min</span>
+          <span class="pill">Mobil eller PC</span>
         </div>
       </div>
+
       <aside class="hero-card" aria-label="Pris og kort info">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
           <div>
-            <div class="muted" style="font-weight:700">Videokonsultasjon</div>
+            <div class="muted" style="font-weight:700">Fra</div>
             <div class="price" data-price>kr 499</div>
             <div class="muted" style="font-size:13px" data-duration>Varighet: 1–30 minutter</div>
           </div>
           <div aria-hidden="true" style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-size:28px">🎥</div>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px">
-          <a class="btn" href="#booking" style="flex:1;justify-content:center" data-action="standard">Velg tidspunkt</a>
+          <a class="btn" href="#booking" style="flex:1;justify-content:center" data-action="standard">Bestill dagtid</a>
         </div>
+        <p class="notice">Får du ikke hjelpen du trenger, refunderer vi beløpet.</p>
       </aside>
     </div>
   </section>
@@ -144,10 +165,10 @@
     <div class="container">
       <h2 class="section-title">Hvorfor video først?</h2>
       <div class="cards">
-        <div class="card"><h3>💰 Spar penger</h3><p class="muted">Unngå unødvendig utrykning.</p></div>
-        <div class="card"><h3>⏱️ Rask avklaring</h3><p class="muted">Plan på minutter.</p></div>
+        <div class="card"><h3>💰 Spar penger</h3><p class="muted">Unngå unødvendig utrykning og bomtur.</p></div>
+        <div class="card"><h3>⏱️ Rask avklaring</h3><p class="muted">Plan på minutter – ikke dager.</p></div>
         <div class="card"><h3>🔧 Gjør det selv</h3><p class="muted">Når du kan og det er lov.</p></div>
-        <div class="card"><h3>🚚 Forberedt besøk</h3><p class="muted">Rørlegger vet hva han skal ha med – spar 1 000–5 000 kr.</p></div>
+        <div class="card"><h3>🚚 Forberedt besøk</h3><p class="muted">Rørlegger møter med riktige deler – spar 1 000–5 000 kr.</p></div>
       </div>
     </div>
   </section>
@@ -156,9 +177,9 @@
     <div class="container">
       <h2 class="section-title">Slik fungerer det</h2>
       <div class="steps">
-        <div class="step"><strong>1) Bestill tid</strong><span class="muted">Velg et tidspunkt som passer. Du kan laste opp bilder/video.</span></div>
-        <div class="step"><strong>2) Videomøte</strong><span class="muted">Snakk med autorisert rørlegger. Vi kartlegger og viser deg konkrete grep.</span></div>
-        <div class="step"><strong>3) Plan og oppfølging</strong><span class="muted">Du får en enkel handlingsplan – og beskjed hvis fysisk besøk trengs.</span></div>
+        <div class="step"><strong>1) Bestill tid</strong><span class="muted">Velg tidspunkt. Du kan laste opp bilder/video.</span></div>
+        <div class="step"><strong>2) Videomøte</strong><span class="muted">Vi kartlegger, bekrefter årsak og viser konkrete grep.</span></div>
+        <div class="step"><strong>3) Plan & besparelse</strong><span class="muted">Du får en enkel handlingsplan. Ved behov for oppmøte: vi kommer forberedt – mindre tidsbruk.</span></div>
       </div>
     </div>
   </section>
@@ -166,18 +187,60 @@
   <section id="priser">
     <div class="container">
       <h2 class="section-title">Pris</h2>
-      <div class="card" style="max-width:520px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div class="cards">
+        <div class="card">
+          <h3>Dag • 499 kr</h3>
+          <p class="muted">1–30 minutter. 07:00–16:00. Egnet for de fleste saker.</p>
+          <a class="btn" href="#booking" data-action="standard" style="margin-top:8px">Bestill dagtid</a>
+        </div>
+        <div class="card">
+          <h3>Kveld • 599 kr</h3>
+          <p class="muted">1–30 minutter. 16:00–21:00. Når det ikke kan vente til i morgen.</p>
+          <a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Bestill kveld</a>
+        </div>
+        <div class="card">
+          <h3>Akutt • 699 kr</h3>
+          <p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p>
+          <a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt</a>
+        </div>
+      </div>
+      <p class="notice">Alle priser inkl. mva. Fornøyd-garanti: Får du ikke hjelpen du trenger, refunderer vi beløpet.</p>
+    </div>
+  </section>
+
+  <section id="kalkulator">
+    <div class="container">
+      <h2 class="section-title">Spar-kalkulator</h2>
+      <p class="muted">Sammenlign estimert kostnad ved fysisk utrykning først vs. videokonsultasjon først.</p>
+      <div class="kalk-wrap">
+        <div class="kalk-grid">
           <div>
-            <div class="muted" style="font-weight:700">Videokonsultasjon</div>
-            <div class="price">kr 499</div>
-            <div class="muted" style="font-size:13px">Varighet: 1–30 minutter</div>
+            <label for="rate">Timepris rørlegger (kr)</label>
+            <input id="rate" type="number" inputmode="numeric" value="1200" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
           </div>
-          <div aria-hidden="true" style="width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-size:26px">💬</div>
+          <div>
+            <label for="oppmote">Utrykningsgebyr (kr)</label>
+            <input id="oppmote" type="number" inputmode="numeric" value="1000" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
+          </div>
+          <div>
+            <label for="timerUten">Timer uten video (h)</label>
+            <input id="timerUten" type="number" step="0.5" value="2.5" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
+          </div>
+          <div>
+            <label for="timerMed">Timer med video (h)</label>
+            <input id="timerMed" type="number" step="0.5" value="1.0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
+          </div>
+          <div>
+            <label for="videopris">Videopris (kr)</label>
+            <select id="videopris" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
+              <option value="499" selected>Dag (499)</option>
+              <option value="599">Kveld (599)</option>
+              <option value="699">Akutt (699)</option>
+            </select>
+          </div>
         </div>
-        <div style="display:flex;gap:10px;margin-top:14px">
-          <a class="btn" href="#booking" style="flex:1;justify-content:center" data-action="standard">Bestill</a>
-        </div>
+        <div class="kalk-result" id="resultat">Potensiell besparelse: kr 0</div>
+        <p class="notice">Dette er et estimat. Virkelig tidsbruk varierer med oppdrag og avstand.</p>
       </div>
     </div>
   </section>
@@ -185,19 +248,25 @@
   <section id="booking">
     <div class="container">
       <h2 class="section-title">Bestill videokonsultasjon</h2>
-      <p class="muted">Velg tidspunkt frem i tid – eller velg akutt ved lekkasje.</p>
+      <p class="muted">Velg tidspunkt – dag, kveld eller akutt ved lekkasje.</p>
       <div class="cards" style="margin-bottom:16px">
         <div class="card">
-          <h3>Standard • 499 kr</h3>
-          <p class="muted">Varighet 1–30 minutter. Passer for de fleste saker.</p>
-          <a class="btn" href="#booking" data-action="standard" style="margin-top:8px">Velg tidspunkt</a>
+          <h3>Dag • 499 kr</h3>
+          <p class="muted">1–30 minutter. 07:00–16:00. Egnet for de fleste.</p>
+          <a class="btn" href="#booking" data-action="standard" style="margin-top:8px">Velg dagtid</a>
         </div>
         <div class="card">
-          <h3>Akutt lekkasje • 699 kr</h3>
-          <p class="muted">Svar innen 1 time (hvis tilgjengelig). Rask avklaring og strakstiltak.</p>
+          <h3>Kveld • 599 kr</h3>
+          <p class="muted">1–30 minutter. 16:00–21:00.</p>
+          <a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Velg kveld</a>
+        </div>
+        <div class="card">
+          <h3>Akutt • 699 kr</h3>
+          <p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p>
           <a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt-time</a>
         </div>
       </div>
+
       <div class="booking-wrap">
         <div class="booking-head">
           <strong>Booking</strong>
@@ -215,19 +284,23 @@
       <h2 class="section-title">Ofte stilte spørsmål</h2>
       <details>
         <summary>Hva rekker vi på en konsultasjon?</summary>
-        <p>Normalt holder 1–30 minutter til å stille riktig diagnose og gi deg tydelige steg. Trenger vi mer tid, avtaler vi det.</p>
+        <p>Normalt holder 1–30 minutter til å stille riktig diagnose og gi tydelige steg. Trenger vi mer tid, avtaler vi det.</p>
+      </details>
+      <details>
+        <summary>Hvordan sparer jeg penger på video først?</summary>
+        <p>Vi avklarer feilen, lager deleliste og planlegger besøket. Dermed blir fysisk oppdrag raskere og mer treffsikkert, og du unngår bomtur.</p>
       </details>
       <details>
         <summary>Må jeg installere noe?</summary>
-        <p>Nei. Du trykker bare på en knapp – fungerer på både mobil og PC.</p>
+        <p>Nei. Du trykker på en lenke – fungerer på både mobil og PC.</p>
       </details>
       <details>
         <summary>Hva hvis det må komme rørlegger?</summary>
-        <p>Da sier vi fra. Besøket blir raskere og mer treffsikkert fordi vi har gjort forarbeidet.</p>
+        <p>Da sier vi fra. Besøket blir kortere fordi vi har gjort forarbeidet.</p>
       </details>
       <details>
         <summary>Kan jeg avbestille?</summary>
-        <p>Avbestilling er gratis frem til 1 minutt før avtalen. Ikke møtt time refunderes ikke.</p>
+        <p>Avbestilling er gratis frem til 1 minutt før avtalen. Ikke-møtt time refunderes ikke.</p>
       </details>
       <details>
         <summary>Hva med fornøyd-garantien?</summary>
@@ -240,14 +313,55 @@
     <div class="container">
       <h2 class="section-title">Kontakt</h2>
       <div class="card" style="max-width:560px">
-        <p>E-post: <a href="mailto:Otnesrorservice@gmai.com">Otnesrorservice@gmai.com</a></p>
+        <p>E-post: <a href="mailto:Otnesrorservice@gmail.com">Otnesrorservice@gmail.com</a></p>
       </div>
     </div>
   </section>
 
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Rørhjelp. Norskregistrert, autorisert rørlegger.
+    </div>
+  </footer>
+
   <script>
-    // Knappelogikk: åpne Calendly hvis satt, ellers bare scroll til #booking
+    // --- Pris-spar kalkulator ---
     (function(){
+      const sel = id => document.getElementById(id);
+      const rate = sel('rate'), oppmote = sel('oppmote'),
+            timerUten = sel('timerUten'), timerMed = sel('timerMed'),
+            videopris = sel('videopris'), res = sel('resultat');
+
+      function fmt(n){ return 'kr ' + Math.max(0, Math.round(n)).toLocaleString('no-NO'); }
+
+      function calc(){
+        const r = +rate.value||0;
+        const u = +oppmote.value||0;
+        const tu = +timerUten.value||0;
+        const tm = +timerMed.value||0;
+        const v = +videopris.value||0;
+
+        const uten = u + (tu * r);
+        const med  = v + (tm * r);
+        const spar = uten - med;
+
+        res.textContent = 'Potensiell besparelse: ' + fmt(spar);
+        res.style.color = spar > 0 ? '#166534' : '#7f1d1d';
+      }
+
+      [rate, oppmote, timerUten, timerMed, videopris].forEach(el=>el.addEventListener('input', calc));
+      calc();
+    })();
+
+    // --- Knappelogikk + Calendly-innbygging ---
+    (function(){
+      const CONFIG = {
+        calendlyStandard: "", // f.eks. "https://calendly.com/bruker/dag"
+        calendlyKveld: "",    // f.eks. "https://calendly.com/bruker/kveld"
+        calendlyAkutt: "",    // f.eks. "https://calendly.com/bruker/akutt"
+        embedBooking: false   // sett true for å bygge inn "dag" i iframen under
+      };
+
       function openCalendly(url){
         if(!url){ return false; }
         window.open(url, "_blank", "noopener");
@@ -260,13 +374,19 @@
         });
       });
 
+      document.querySelectorAll('[data-action="kveld"]').forEach(btn=>{
+        btn.addEventListener('click', function(e){
+          if(openCalendly(CONFIG.calendlyKveld)) e.preventDefault();
+        });
+      });
+
       document.querySelectorAll('[data-action="akutt"]').forEach(btn=>{
         btn.addEventListener('click', function(e){
           if(openCalendly(CONFIG.calendlyAkutt)) e.preventDefault();
         });
       });
 
-      // Bygg inn iframe automatisk hvis ønsket
+      // Bygg inn iframe automatisk hvis ønsket (dagtid som standard)
       if(CONFIG.embedBooking && CONFIG.calendlyStandard){
         const frame = document.getElementById('calendlyFrame');
         frame.innerHTML = `<iframe title="Booking" class="calendly-iframe"
@@ -278,6 +398,9 @@
         fallback.target = '_blank';
         fallback.rel = 'noopener';
       }
+
+      // År i footer
+      document.getElementById('y').textContent = new Date().getFullYear();
     })();
   </script>
 </body>
