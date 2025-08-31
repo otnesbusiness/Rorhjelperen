@@ -68,34 +68,12 @@
     .save{display:flex;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;box-shadow:var(--shadow)}
     .save strong{color:#166534}
 
-    .cost-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--shadow);margin-top:14px}
-    .cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .cost-col{background:#f8fafc;border:1px dashed var(--border);border-radius:10px;padding:10px}
-    .cost-col h4{margin:0 0 6px;font-size:14px}
-    .cost-caption{font-size:13px;margin:0 0 8px;background:#fff7ed;border:1px solid #fed7aa;color:#92400e;padding:8px 10px;border-radius:10px}
-
-    .kalk-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
-    .kalk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .kalk-grid label{font-size:13px;color:var(--muted)}
-    .kalk-result{margin-top:10px;font-weight:800}
-    .notice{margin-top:6px;font-size:12px;color:var(--muted)}
-
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .form-grid .full{grid-column:1 / -1}
-    .field{display:flex;flex-direction:column;gap:6px}
-    .field input,.field select,.field textarea{padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit}
-
-    /* Takk-seksjon: skjult som standard, vis kun ved #takk */
-    #takk{display:none}
-    #takk:target{display:block}
-
     /* Mobil */
     @media (max-width:920px){
       .grid-hero{grid-template-columns:1fr}
       .hero-aside{order:1; margin-top:14px}
       .cards{grid-template-columns:1fr 1fr}
       .steps{grid-template-columns:1fr}
-      .cost-grid{grid-template-columns:1fr}
       .form-grid{grid-template-columns:1fr}
     }
     @media (max-width:560px){ .cards{grid-template-columns:1fr} .menu{display:none} }
@@ -124,8 +102,8 @@
       <nav class="menu" aria-label="Hovedmeny">
         <a href="#hvordan">Slik fungerer det</a>
         <a href="#hvorfor">Hvorfor digitalt først</a>
-        <a href="#priser">Pris</a>
-        <a href="#kalkulator">Spar-kalkulator</a>
+        <!-- Fjernet: <a href="#priser">Pris</a> -->
+        <!-- Fjernet: <a href="#kalkulator">Spar-kalkulator</a> -->
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -144,15 +122,6 @@
         <div class="save" style="margin-top:10px;background:#eff6ff;border-color:#bae6fd">
           <div aria-hidden="true">📷</div>
           <div><strong>Må ikke være video:</strong> Ofte holder det med <strong>bilder</strong> + kort beskrivelse. Vi sier hvilke bilder vi trenger og hva du bør opplyse til rørlegger.</div>
-        </div>
-
-        <div class="cost-box" aria-label="Typiske utrykninger">
-          <p class="cost-caption">Dette er <strong>ikke</strong> våre priser – men <strong>typiske markedspriser</strong> for utrykning. Dette kan ofte <strong>unngås</strong> med digital konsultasjon først.</p>
-          <div class="cost-grid">
-            <div class="cost-col"><h4>Utrykning dag (07–16)</h4><p class="muted">Typisk <strong>2 500–3 500 kr</strong>.</p></div>
-            <div class="cost-col"><h4>Kveld/helg (etter 16)</h4><p class="muted">Typisk <strong>4 500–6 000 kr</strong>.</p></div>
-          </div>
-          <p class="note" style="font-weight:700">Vi kan ofte stoppe lekkasje midlertidig og avverge skade – bestill deretter <em>vanlig</em> besøk uten dyr utrykning.</p>
         </div>
 
         <div class="badges">
@@ -222,42 +191,9 @@
     </div>
   </section>
 
-  <section id="priser">
-    <div class="container">
-      <h2 class="section-title">Pris</h2>
-      <div class="cards">
-        <div class="card"><h3>Dag • 499 kr</h3><p class="muted">1–30 minutter. 07:00–16:00. Egnet for de fleste saker.</p><a class="btn" href="#booking" data-action="standard" style="margin-top:8px">Bestill dagtid</a></div>
-        <div class="card"><h3>Kveld • 599 kr</h3><p class="muted">1–30 minutter. 16:00–21:00. Når det ikke kan vente til i morgen.</p><a class="btn ok" href="#booking" data-action="kveld" style="margin-top:8px">Bestill kveld</a></div>
-        <div class="card"><h3>Akutt • 699 kr</h3><p class="muted">Tlf/video 1–30 minutter. Svar innen én time hvis tilgjengelig.</p><a class="btn warn" href="#booking" data-action="akutt" style="margin-top:8px">Start akutt</a></div>
-      </div>
-      <p class="notice">Alle priser inkl. mva. <strong>Betaling etter endt konsultasjon.</strong></p>
-    </div>
-  </section>
+  <!-- Fjernet hele PRIS-seksjonen (#priser) som i skjermbildet -->
 
-  <section id="kalkulator">
-    <div class="container">
-      <h2 class="section-title">Spar-kalkulator</h2>
-      <p class="muted">Sammenlign estimert kostnad ved fysisk utrykning først vs. digital konsultasjon først.</p>
-      <div class="kalk-wrap">
-        <div class="kalk-grid">
-          <div><label for="rate">Timepris rørlegger (kr)</label><input id="rate" type="number" inputmode="numeric" value="1200" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
-          <div><label for="oppmote">Utrykningsgebyr (kr)</label><input id="oppmote" type="number" inputmode="numeric" value="1000" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
-          <div><label for="timerUten">Timer uten video (h)</label><input id="timerUten" type="number" step="0.5" value="2.5" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
-          <div><label for="timerMed">Timer med video (h)</label><input id="timerMed" type="number" step="0.5" value="1.0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px"></div>
-          <div>
-            <label for="videopris">Videopris (kr)</label>
-            <select id="videopris" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px">
-              <option value="499" selected>Dag (499)</option>
-              <option value="599">Kveld (599)</option>
-              <option value="699">Akutt (699)</option>
-            </select>
-          </div>
-        </div>
-        <div class="kalk-result" id="resultat">Potensiell besparelse: kr 0</div>
-        <p class="notice">Dette er et estimat. Virkelig tidsbruk varierer med oppdrag og avstand.</p>
-      </div>
-    </div>
-  </section>
+  <!-- Fjernet hele SPAR-KALKULATOR-seksjonen (#kalkulator) -->
 
   <section id="booking">
     <div class="container">
@@ -280,12 +216,12 @@
             <input type="hidden" name="_next" id="fsNext" value="https://otnesbusiness.github.io/#takk" />
             <!-- Honeypot for spam -->
             <input type="text" name="_honey" style="display:none">
-            
+
             <div class="form-grid">
               <label class="field"><span>Navn</span><input name="name" type="text" required placeholder="Ola Nordmann"></label>
               <label class="field"><span>E-post</span><input name="email" type="email" required placeholder="ola@nordmann.no"></label>
               <label class="field"><span>Mobil</span><input name="mobil" type="tel" required placeholder="+47 4X XX XX XX"></label>
-              
+
               <fieldset class="field" style="border:0;padding:0;margin:0">
                 <span>Type</span>
                 <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -389,21 +325,17 @@
   </footer>
 
   <script>
-    // --- Pris-spar kalkulator ---
-    (function(){
-      const sel = id => document.getElementById(id);
-      const rate = sel('rate'), oppmote = sel('oppmote'),
-            timerUten = sel('timerUten'), timerMed = sel('timerMed'),
-            videopris = sel('videopris'), res = sel('resultat');
-      function fmt(n){ return 'kr ' + Math.max(0, Math.round(n)).toLocaleString('no-NO'); }
-      function calc(){
-        const r = +rate?.value||0, u = +oppmote?.value||0, tu = +timerUten?.value||0, tm = +timerMed?.value||0, v = +videopris?.value||0;
-        const uten = u + (tu * r); const med  = v + (tm * r); const spar = uten - med;
-        if(res){ res.textContent = 'Potensiell besparelse: ' + fmt(spar); res.style.color = spar > 0 ? '#166534' : '#7f1d1d'; }
-      }
-      [rate, oppmote, timerUten, timerMed, videopris].forEach(el=>{ if(el) el.addEventListener('input', calc); });
-      calc();
-    })();
+    // --- Booking: ENKEL KONFIG FOR ÅPNINGSTIDER & INTERVALL ---
+    // Endre tider her (inkluderer slutt-timen). Intervall i minutter.
+    const BOOKING_CONF = {
+      intervalMin: 15,
+      ranges: {
+        Dag:   { start: 7,  end: 16 },
+        Kveld: { start: 16, end: 21 },
+        Akutt: { start: 7,  end: 21 } // fallback/fullt spekter
+      },
+      akuttPhone: '+47 400 00 000'
+    };
 
     // --- Booking logikk ---
     (function(){
@@ -416,17 +348,19 @@
       document.querySelectorAll('[data-action="kveld"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Kveld')));
       document.querySelectorAll('[data-action="akutt"]').forEach(btn=>btn.addEventListener('click', ()=>setTypeAndScroll('Akutt')));
 
-      // Akutt-boks vis/skjul
+      // Akutt-boks vis/skjul + telefon
       const akuttBox = document.getElementById('akuttBox');
       const akuttTel = document.getElementById('akuttTel');
-      const AKUTT_PHONE = '+47 400 00 000'; // bytt når klart
-      if(akuttTel){ akuttTel.textContent = AKUTT_PHONE; akuttTel.href = 'tel:' + AKUTT_PHONE.replace(/\s+/g,''); }
+      if(akuttTel){
+        akuttTel.textContent = BOOKING_CONF.akuttPhone;
+        akuttTel.href = 'tel:' + BOOKING_CONF.akuttPhone.replace(/\s+/g,'');
+      }
       document.querySelectorAll('input[name="type"]').forEach(r=>{
         r.addEventListener('change', ()=>{
-          const v = document.querySelector('input[name="type"]:checked')?.value;
+          const v = document.querySelector('input[name="type"]:checked')?.value || 'Dag';
           if(akuttBox) akuttBox.style.display = (v==='Akutt') ? 'flex' : 'none';
-          applyRangeByType(v||'Dag');
-          // Påkrav: kun krav til dato/tid når ikke Akutt
+          applyRangeByType(v);
+          // Dato/tid kreves ikke for Akutt
           const req = (v !== 'Akutt');
           const datoInp = document.querySelector('input[name="dato"]');
           const tidSel = document.getElementById('tidSelect');
@@ -434,17 +368,17 @@
         });
       });
 
-      // Tid-velger: 15-min intervaller etter type
+      // Tid-velger bygges fra konfig
       const tidSel = document.getElementById('tidSelect');
-      function buildTimes(startHour, endHour){
-        if(!tidSel) return;
+      function buildTimes(range){
+        if(!tidSel || !range) return;
         tidSel.innerHTML = '<option value="">Velg tid</option>';
-        for(let h=startHour; h<=endHour; h++){
-          for(let m=0; m<60; m+=15){
-            if(h===endHour && m>0) break;
+        for(let h = range.start; h <= range.end; h++){
+          for(let m = 0; m < 60; m += BOOKING_CONF.intervalMin){
+            if(h === range.end && m > 0) break;
             const hh = String(h).padStart(2,'0');
             const mm = String(m).padStart(2,'0');
-            const t = hh + ':' + mm;
+            const t = `${hh}:${mm}`;
             const opt = document.createElement('option');
             opt.value = t; opt.textContent = t;
             tidSel.appendChild(opt);
@@ -452,9 +386,8 @@
         }
       }
       function applyRangeByType(val){
-        if(val==='Dag'){ buildTimes(7,16); }
-        else if(val==='Kveld'){ buildTimes(16,21); }
-        else { buildTimes(7,21); }
+        const range = BOOKING_CONF.ranges[val] || BOOKING_CONF.ranges.Dag;
+        buildTimes(range);
       }
       const checked = document.querySelector('input[name="type"]:checked');
       applyRangeByType(checked ? checked.value : 'Dag');
