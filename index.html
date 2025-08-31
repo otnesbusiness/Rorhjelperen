@@ -100,7 +100,7 @@
     }
     @media (max-width:560px){ .cards{grid-template-columns:1fr} .menu{display:none} }
   </style>
-  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y="0" x2="1" y="1"><stop stop-color="%237cc5eb"/><stop offset="1" stop-color="%23cfefff"/></linearGradient></defs><rect rx="12" ry="12" width="64" height="64" fill="white"/><circle cx="32" cy="32" r="26" fill="url(%23g)"/><path d="M35 19l-7 9a6 6 0 108 8l9-7-3-3-4 3-3-3 3-4-3-3z" fill="white"/></svg>' />
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%237cc5eb"/><stop offset="1" stop-color="%23cfefff"/></linearGradient></defs><rect rx="12" ry="12" width="64" height="64" fill="white"/><circle cx="32" cy="32" r="26" fill="url(%23g)"/><path d="M35 19l-7 9a6 6 0 108 8l9-7-3-3-4 3-3-3 3-4-3-3z" fill="white"/></svg>' />
 </head>
 <body>
   <header>
@@ -405,7 +405,7 @@
       calc();
     })();
 
-    // --- Booking logikk (minimal endring, bedre dato/klokkeslett) ---
+    // --- Booking logikk ---
     (function(){
       function setTypeAndScroll(t){
         const r = document.querySelector('input[name="type"][value="'+t+'"]');
@@ -431,84 +431,31 @@
           const datoInp = document.querySelector('input[name="dato"]');
           const tidSel = document.getElementById('tidSelect');
           if(datoInp) datoInp.required = req; if(tidSel) tidSel.required = req;
-          // Skjul/vis felt ved akutt
-          const datoWrap = datoInp?.closest('label.field');
-          const tidWrap = tidSel?.closest('label.field');
-          if(datoWrap) datoWrap.style.display = req ? '' : 'none';
-          if(tidWrap) tidWrap.style.display = req ? '' : 'none';
         });
       });
 
-      // Tid-velger: 15-min intervaller (filtrer bort fortid i dag + auto-velg første ledige)
+      // Tid-velger: 15-min intervaller etter type
       const tidSel = document.getElementById('tidSelect');
-      const datoInp = document.querySelector('input[name="dato"]');
-
-      // Sett min-dato = i dag
-      (function setMinDate(){
-        if(!datoInp) return;
-        const now = new Date();
-        const yyyy = now.getFullYear();
-        const mm = String(now.getMonth()+1).padStart(2,'0');
-        const dd = String(now.getDate()).padStart(2,'0');
-        datoInp.min = `${yyyy}-${mm}-${dd}`;
-        if(!datoInp.value) datoInp.value = datoInp.min;
-      })();
-
-      function timeToMinutes(h, m){ return h*60 + m; }
-
       function buildTimes(startHour, endHour){
         if(!tidSel) return;
         tidSel.innerHTML = '<option value="">Velg tid</option>';
-
-        const selected = datoInp?.value;
-        const now = new Date();
-        const todayStr = now.toISOString().slice(0,10);
-        const roundedMinRaw = Math.ceil(now.getMinutes()/15)*15;
-        const roundedMin = roundedMinRaw >= 60 ? 60 : roundedMinRaw;
-        const cutoff = (selected === todayStr)
-          ? timeToMinutes(now.getHours(), roundedMin)
-          : -1;
-
-        let firstEnabled = null;
-
         for(let h=startHour; h<=endHour; h++){
           for(let m=0; m<60; m+=15){
             if(h===endHour && m>0) break;
             const hh = String(h).padStart(2,'0');
             const mm = String(m).padStart(2,'0');
-            const t = `${hh}:${mm}`;
+            const t = hh + ':' + mm;
             const opt = document.createElement('option');
             opt.value = t; opt.textContent = t;
-
-            if(cutoff >= 0 && timeToMinutes(h,m) <= cutoff){
-              opt.disabled = true;
-              opt.textContent += ' (passert)';
-            }
-
             tidSel.appendChild(opt);
-            if(!opt.disabled && !firstEnabled) firstEnabled = opt;
           }
         }
-
-        if(firstEnabled){
-          firstEnabled.selected = true;
-          tidSel.dispatchEvent(new Event('change'));
-        }
       }
-
       function applyRangeByType(val){
         if(val==='Dag'){ buildTimes(7,16); }
         else if(val==='Kveld'){ buildTimes(16,21); }
         else { buildTimes(7,21); }
       }
-
-      if(datoInp){
-        datoInp.addEventListener('change', ()=>{
-          const v = document.querySelector('input[name="type"]:checked')?.value || 'Dag';
-          applyRangeByType(v);
-        });
-      }
-
       const checked = document.querySelector('input[name="type"]:checked');
       applyRangeByType(checked ? checked.value : 'Dag');
 
